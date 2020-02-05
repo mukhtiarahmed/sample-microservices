@@ -1,0 +1,18 @@
+spring:
+  profiles:
+    active: test
+  jpa:
+    database: h2
+    hibernate:
+      ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+  cloud:
+    discovery:
+      enabled: false
+
+page:
+  size: ${PAGE_SIZE:10}
+
+
+

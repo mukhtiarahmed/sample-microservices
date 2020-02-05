@@ -1,0 +1,68 @@
+spring:
+  application:
+    name: person-service
+
+  profiles:
+    active: default
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:5432/person_local}
+    username: ${DATABASE_USER:postgres}
+    password: ${DATABASE_SEC:docker}
+
+  jpa:
+    properties:
+      hibernate:
+        temp:
+          use_jdbc_metadata_defaults: false
+  mvc:
+    servlet:
+      load-on-startup: 1
+
+
+
+
+server:
+  port: 9876
+  servlet:
+      context-path: /person
+
+eureka:
+    client:
+      serviceUrl:
+        defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+    instance:
+      preferIpAddress: true
+
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 1000000
+
+remote:
+  token:
+    store: http://${GATEWAY_SERVER:localhost}:8080/auth/oauth/check_token
+
+security:
+  oauth2:
+    resource:
+      token-info-uri: http://${GATEWAY_SERVER:localhost}:8080/auth/oauth/check_token
+      user-info-uri: http://${GATEWAY_SERVER:localhost}:8080/auth/current
+      prefer-token-info: true
+      filter-order : 3
+
+    client:
+        clientId: cffe3990-6f0e-11e8-b750-4d8614c940f0
+        clientSecret: secret
+        accessTokenUri: http://${GATEWAY_SERVER:localhost}:8080/auth/oauth/token
+        grant-type: client_credentials
+        scope: server
+    authorization:
+      checkTokenAccess: isAuthenticated()
+
+
+page:
+  size: ${PAGE_SIZE:10}
