@@ -14,7 +14,7 @@ spring:
       hibernate:
         temp:
           use_jdbc_metadata_defaults: false
-    open-in-view: false
+    open-in-view: true
   mvc:
     servlet:
       load-on-startup: 1
