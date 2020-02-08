@@ -2,12 +2,14 @@ package com.tenhawks.client.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,7 +20,8 @@ import java.util.List;
  */
 @Data
 @NoArgsConstructor
-public class PersonDTO {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class PersonDTO implements Serializable {
 
 
     private String id;

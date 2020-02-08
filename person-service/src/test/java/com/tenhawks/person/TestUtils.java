@@ -1,6 +1,8 @@
 package com.tenhawks.person;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.tenhawks.bean.UserDetail;
 import com.tenhawks.person.domain.Colour;
 import com.tenhawks.person.domain.Hobby;
@@ -10,9 +12,14 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+
+import static com.tenhawks.bean.CommonHelper.DATE_FORMAT;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public final class TestUtils {
@@ -21,6 +28,8 @@ public final class TestUtils {
 
     public static String convertObjectToJson(Object object) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
+        mapper.registerModule(new JavaTimeModule());
+        mapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         return mapper.writeValueAsString(object);
     }
 
@@ -61,7 +70,7 @@ public final class TestUtils {
         person.setFirstName(firstName);
         person.setLastName(lastName);
         person.setColourId("00298aa3-17ff-4f4a-a647-1fd06e4caab7");
-        person.setAge(45);
+        person.setDateOfBirth( LocalDate.of(2000, Month.JANUARY, 1));
         person.setHobbies(Arrays.asList("fba2f4e2-9dff-421b-9696-c6e3fa77653b", "fbc0b795-9f64-4f3c-b046-343bbc361e1f"));
         return person;
     }
