@@ -2,7 +2,13 @@ spring:
   application:
     name: cloud-gateway
 
-
+eureka:
+    client:
+      serviceUrl:
+        defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+    instance:
+      preferIpAddress: true
+      
 hystrix:
   shareSecurityContext: false
   command:
@@ -73,13 +79,5 @@ management:
      routes:
        enabled: true
 
-eureka:
-    client:
-      registerWithEureka: true
-      fetchRegistry: true
 
-      serviceUrl:
-        defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
-    instance:
-      preferIpAddress: true
 

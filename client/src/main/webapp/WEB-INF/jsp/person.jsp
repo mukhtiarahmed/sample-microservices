@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<c:set var="title" value="Company Master" scope="request" />
+<c:set var="title" value="Person List" scope="request" />
 <html>
 <head>
     <head>
@@ -44,7 +44,7 @@
                                                 class="pe-7s-plus"></i>   New
                                         </a>
                                     </p>
-                                    <h4  class="title">No Company Master yet!</h4>
+                                    <h4  class="title">No Person List yet!</h4>
                                     <p class="category"><br/></p>
                                 </div>
                             </c:if>
@@ -52,7 +52,7 @@
                                 <div>
                                     <div class="header">
 
-                                        <h4 class="title">Company Master List  </h4>
+                                        <h4 class="title">Person List </h4>
                                         <div class="pull-right">
                                             <form class="form-inline md-form mr-auto mb-4" onsubmit="searchPerson(); return false;">
 

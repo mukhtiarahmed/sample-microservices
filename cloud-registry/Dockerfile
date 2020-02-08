@@ -1,6 +1,9 @@
 FROM openjdk:8-jdk-alpine
-MAINTAINER mukhtiar
-COPY target/cloud-registry-1.0.jar /opt/lib/
-ENTRYPOINT ["/usr/bin/java"]
-CMD ["-jar", "/opt/lib/cloud-registry-1.0.jar"]
+
+VOLUME /tmp
 EXPOSE 8761
+COPY target/cloud-registry-1.0.jar  app.jar
+RUN sh -c 'touch /app.jar'
+
+ENTRYPOINT java -Djava.security.egd=file:/dev/./urandom  -jar app.jar
+

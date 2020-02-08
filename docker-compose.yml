@@ -48,8 +48,7 @@ services:
         ports:
             - 8080:8080
         environment:
-            - JAVA_OPTS=
-                -DEUREKA_URI=http://eureka-server:8761/eureka
+            - EUREKA_URI=http://eureka-server:8761/eureka
         networks:
             - nano-network
         links:          
@@ -65,8 +64,6 @@ services:
         ports:
             - 9292:9292
         environment:
-            - JAVA_OPTS=
-                -DEUREKA_URI=http://eureka-server:8761/eureka
             - REDIS_HOST=redis-server
             - REDIS_PORT=6379
             - CASSANDRA_HOST=cassandradb
@@ -98,7 +95,6 @@ services:
             - eureka-server:eureka-server
         depends_on:          
             - eureka-server
-         #   - cache
         logging:
             driver: json-file
 
@@ -107,9 +103,6 @@ services:
     container_name: person-service
     environment:
       - DATABASE_URL= person_db
-      - JAVA_OPTS=
-           -DEUREKA_URI=http://eureka-server:8761/eureka
-
       - GATEWAY_SERVER=gateway-server
       - EUREKA_URI=http://eureka-server:8761/eureka
       - DATABASE_USER=postgres
@@ -128,8 +121,6 @@ services:
           ports:
               - 8090:8090
           environment:
-              - JAVA_OPTS=
-                  -DEUREKA_URI=http://eureka-server:8761/eureka
               - GATEWAY_SERVER=gateway-server
               - EUREKA_URI=http://eureka-server:8761/eureka
           networks:
@@ -138,7 +129,7 @@ services:
               - eureka-server:eureka-server
           depends_on:
               - eureka-server
-           #   - cache
+
           logging:
               driver: json-file
 
