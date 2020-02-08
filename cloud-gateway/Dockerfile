@@ -1,8 +1,9 @@
 FROM openjdk:8-jdk-alpine
-MAINTAINER mukhtiar
-COPY target/cloud-gateway-1.0.jar /opt/lib/
 
+VOLUME /tmp
+EXPOSE 8080
+COPY target/auth-service-1.0.jar app.jar
+RUN sh -c 'touch /app.jar'
 
-ENTRYPOINT exec /usr/bin/java $JAVA_OPTS  -jar /opt/lib/cloud-gateway-1.0.jar
+ENTRYPOINT java -Djava.security.egd=file:/dev/./urandom  -jar app.jar
 
-EXPOSE 4000

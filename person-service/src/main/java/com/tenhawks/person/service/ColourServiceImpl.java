@@ -28,7 +28,7 @@ public class ColourServiceImpl extends BaseListableService<Colour, String> imple
 
     @Override
     @LogMethod
-    public Colour update(String id, Colour entity) throws AssignmentException {
+    public Colour update(String id, Colour entity) {
         checkNull(id, "id");
         checkNull(entity, "entity");
         Colour oldEntity = get(id);

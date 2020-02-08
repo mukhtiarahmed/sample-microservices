@@ -49,6 +49,13 @@ zuul:
       retryable: true
       sensitiveHeaders:
 
+    client-app:
+          path: /client/**
+          serviceId: client-app
+          stripPrefix: false
+          retryable: true
+          sensitiveHeaders:
+
 
 
 

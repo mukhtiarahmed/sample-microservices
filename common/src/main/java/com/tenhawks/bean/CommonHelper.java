@@ -9,7 +9,8 @@ import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Collection;
 
 
@@ -43,21 +44,20 @@ public final class CommonHelper {
     /**
      * The object mapper.
      */
-    private static final ObjectMapper MAPPER = new ObjectMapper();
 
-    public static final String ERROR_MESSAGE = "Internal Server Error";
 
-    public static final String INVALID_REQUEST_MESSAGE = "HTTP URL or Method is not valid";
+    public static final String DATE_FORMAT = "yyyy-MM-dd";
 
-    public static final String MISSING_REQUEST_JSON_MESSAGE = "Missing Request Input JSON";
-
-    public static final String AUTH_FAILED_MESSAGE = "Authentication Failed";
+    public static final String ERROR_MESSAGE = "Internal Server error. Please contact to admin";
 
     public static final String  ERROR_NOT_PROVIDED =  " %s is not provided";
 
-    public static final int PAGE_SIZE = 10;
 
     public static final int STRENGTH = 12;
+
+    public static final String ERROR = "error";
+
+    public static final String SUCCESS = "success";
 
 
     public static String generateBCryptPassword(final String plainPassword) {
@@ -158,7 +158,15 @@ public final class CommonHelper {
         }
     }
 
-
+    /**
+     * convert LocalDate to String date format 2020-10-25
+     * @param localDate
+     * @return
+     */
+    public static String getDateFormat(LocalDate localDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(DATE_FORMAT);
+        return formatter.format(localDate);
+    }
 
 
 }

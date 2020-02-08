@@ -31,7 +31,7 @@ public class ExceptionHandlerController {
     log.info("alreadyRegisteredExceptionHandler {}", exception.getMessage());
     ApiResponse apiResponse = new ApiResponse();
     apiResponse.setMessage(exception.getMessage());
-    apiResponse.setStatus(new Meta(HttpStatus.BAD_REQUEST));
+    apiResponse.setStatus(new Meta(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase()));
     return apiResponse;
   }
 
@@ -41,7 +41,7 @@ public class ExceptionHandlerController {
     log.info("notRegisteredExceptionHandler {}", exception.getMessage());
     ApiResponse apiResponse = new ApiResponse();
     apiResponse.setMessage(exception.getMessage());
-    apiResponse.setStatus(new Meta(HttpStatus.BAD_REQUEST));
+    apiResponse.setStatus(new Meta(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase()));
     return apiResponse;
   }
 
@@ -52,7 +52,7 @@ public class ExceptionHandlerController {
     log.info("alreadyUsedExceptionHandler {}", exception.getMessage());
     ApiResponse apiResponse = new ApiResponse();
     apiResponse.setMessage(exception.getMessage());
-    apiResponse.setStatus(new Meta(HttpStatus.BAD_REQUEST));
+    apiResponse.setStatus(new Meta(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase()));
     return apiResponse;
   }
   
@@ -62,7 +62,7 @@ public class ExceptionHandlerController {
     log.info("authenticationException {}", exception.getMessage());
     ApiResponse apiResponse = new ApiResponse();
     apiResponse.setMessage(exception.getMessage());
-    apiResponse.setStatus(new Meta(HttpStatus.UNAUTHORIZED));
+    apiResponse.setStatus(new Meta(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.getReasonPhrase()));
     return apiResponse;
   }
 
@@ -72,7 +72,7 @@ public class ExceptionHandlerController {
     log.info("accessDeniedExceptionHandler {}", exception.getMessage());
     ApiResponse apiResponse = new ApiResponse();
     apiResponse.setMessage(exception.getMessage());
-    apiResponse.setStatus(new Meta(HttpStatus.UNAUTHORIZED));
+    apiResponse.setStatus(new Meta(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.getReasonPhrase()));
     return apiResponse;
   }
 
@@ -82,7 +82,7 @@ public class ExceptionHandlerController {
     log.error("exceptionHandler ", exception);
     ApiResponse apiResponse = new ApiResponse();
     apiResponse.setMessage(exception.getMessage());
-    apiResponse.setStatus(new Meta(HttpStatus.INTERNAL_SERVER_ERROR));
+    apiResponse.setStatus(new Meta(HttpStatus.INTERNAL_SERVER_ERROR.value(), HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase()));
     return apiResponse;
   }
   

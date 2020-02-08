@@ -122,6 +122,25 @@ services:
      nano-network:
        aliases:
         - person-service
+  client-app:
+          container_name: client-app
+          image:  client-app:latest
+          ports:
+              - 8090:8090
+          environment:
+              - JAVA_OPTS=
+                  -DEUREKA_URI=http://eureka-server:8761/eureka
+              - GATEWAY_SERVER=gateway-server
+              - EUREKA_URI=http://eureka-server:8761/eureka
+          networks:
+              - nano-network
+          links:
+              - eureka-server:eureka-server
+          depends_on:
+              - eureka-server
+           #   - cache
+          logging:
+              driver: json-file
 
 volumes:
   dbvolume:

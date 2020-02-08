@@ -1,5 +1,6 @@
 package com.tenhawks.person.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -14,6 +15,8 @@ import java.util.List;
 public class SimplePersonDTO implements Serializable {
 
 
+    private String id;
+
     private String firstName;
 
     private String lastName;
@@ -22,7 +25,12 @@ public class SimplePersonDTO implements Serializable {
 
     private int age;
 
-    private List<String> hobby;
+    private List<String> hobbies;
+
+    @JsonIgnore
+    public String getFormatedHobbies() {
+        return String.join(", ", hobbies);
+    }
 
 
 }

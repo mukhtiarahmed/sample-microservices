@@ -36,11 +36,7 @@ import static com.tenhawks.bean.CommonHelper.checkNull;
 public class PersonServiceImpl extends BaseListableService<Person, String> implements PersonService {
 
     private final List<String> columnCompMaster = Arrays.asList(
-            "firstName", "lastName", "age");
-
-    @Value("${page.size:10}")
-    private int pageSize;
-
+            "firstName", "lastName", "dateOfBirth");
 
     @Override
     @LogMethod
@@ -63,19 +59,21 @@ public class PersonServiceImpl extends BaseListableService<Person, String> imple
 
         Pageable pageable;
         int pageId = searchCriteria.getPage();
-        // PageRequest pageId start from 0
-        if(pageId > 0) {
-            pageId--;
-        } else if(pageId < 0) {
+        if(pageId <= 0) {
             pageId = 0;
+        } else {
+            pageId--;
         }
+
+        int pageSize = searchCriteria.getPageSize() > 0 ?  searchCriteria.getPageSize() : this.pageSize;
+
+        log.info("PersonService pageId {}, sortColumn {} ", pageId, searchCriteria.getSortColumn());
         if (columnCompMaster.contains(searchCriteria.getSortColumn())) {
             Sort sort = Sort.by(new Sort.Order(Sort.Direction.fromString(searchCriteria.getSortOrder()),
                     searchCriteria.getSortColumn()));
-            pageable = PageRequest.of(pageId, searchCriteria.getPageSize() > 0 ?
-                    searchCriteria.getPageSize() : pageSize, sort);
+            pageable = PageRequest.of(pageId, pageSize , sort);
         } else {
-            pageable = PageRequest.of(pageId, searchCriteria.getPageSize());
+            pageable = PageRequest.of(pageId, pageSize);
         }
 
         Page<Person> page;

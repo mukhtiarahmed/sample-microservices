@@ -1,30 +1,24 @@
 package com.tenhawks.bean;
 
-import org.springframework.http.HttpStatus;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-public class Meta {
+import java.io.Serializable;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Meta  implements Serializable {
+
+	private static final long serialVersionUID = 12112526L;
+
 	private int status;
 	private String message;
 
-    public Meta(HttpStatus status) {
-    		this.status = status.value();
-    		this.message = status.getReasonPhrase();
-    }
-
-
-    public int getStatus() {
-		return status;
+	public void setStatus(Number number) {
+		this.status = number.intValue();
 	}
 
-	public void setStatus(int status) {
-		this.status = status;
-	}
 
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
 }

@@ -70,7 +70,7 @@ public class HobbyController {
         List<HobbyDTO> hobbyDTOS = hobbyList.stream().map(
                 Mapper::toHobbyDTO).collect(Collectors.toList());
         ApiResponse<List> response = new ApiResponse<>();
-        response.setStatus(new Meta(HttpStatus.OK));
+        response.setStatus(new Meta(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase()));
         response.setData(hobbyDTOS);
         return response;
     }
@@ -90,7 +90,7 @@ public class HobbyController {
     public ApiResponse<HobbyDTO> get(@PathVariable String id) throws AssignmentException {
         Hobby hobby = serviceLocator.getHobbyService().get(id);
         ApiResponse<HobbyDTO> response = new ApiResponse<>();
-        response.setStatus(new Meta(HttpStatus.OK));
+        response.setStatus(new Meta(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase()));
         response.setData(Mapper.toHobbyDTO(hobby));
         return response;
     }
@@ -113,7 +113,7 @@ public class HobbyController {
         entity.setName(dto.getName());
         Hobby hobby = serviceLocator.getHobbyService().create(entity);
         ApiResponse<HobbyDTO> response = new ApiResponse<>();
-        response.setStatus(new Meta(HttpStatus.OK));
+        response.setStatus(new Meta(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase()));
         response.setData(Mapper.toHobbyDTO(hobby));
         return response;
     }
@@ -137,7 +137,7 @@ public class HobbyController {
         entity.setName(dto.getName());
         Hobby hobby = serviceLocator.getHobbyService().update(id, entity);
         ApiResponse<HobbyDTO> response = new ApiResponse<>();
-        response.setStatus(new Meta(HttpStatus.OK));
+        response.setStatus(new Meta(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase()));
         response.setData(Mapper.toHobbyDTO(hobby));
         return response;
     }
@@ -156,7 +156,7 @@ public class HobbyController {
     public ApiResponse<String> delete(@PathVariable String id) throws AssignmentException {
         serviceLocator.getHobbyService().delete(id);
         ApiResponse<String> response = new ApiResponse<>();
-        response.setStatus(new Meta(HttpStatus.OK));
+        response.setStatus(new Meta(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase()));
         response.setMessage("Delete Hobby");
         return response;
 

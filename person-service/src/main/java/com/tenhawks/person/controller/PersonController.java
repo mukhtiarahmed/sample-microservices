@@ -81,7 +81,7 @@ public class PersonController {
         ListResponseDTO<SimplePersonDTO> responseDTO = new ListResponseDTO<>();
         responseDTO.setData(dtoList);
         responseDTO.setTotalElement(listResponseDTO.getTotalElement());
-        responseDTO.setStatus(new Meta(HttpStatus.OK));
+        responseDTO.setStatus(new Meta(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase()));
         return responseDTO;
 
     }
@@ -110,7 +110,7 @@ public class PersonController {
         ListResponseDTO<PersonDTO> responseDTO = new ListResponseDTO<>();
         responseDTO.setData(dtoList);
         responseDTO.setTotalElement(listResponseDTO.getTotalElement());
-        responseDTO.setStatus(new Meta(HttpStatus.OK));
+        responseDTO.setStatus(new Meta(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase()));
         return responseDTO;
     }
 
@@ -127,9 +127,9 @@ public class PersonController {
     @RequestMapping(value = "/{id}", method = GET, produces = APPLICATION_JSON_VALUE)
     @LogMethod
     @ResponseBody
-    public ApiResponse get(@PathVariable String id) throws AssignmentException {
+    public ApiResponse get(@PathVariable("id") String id) throws AssignmentException {
         Person person = serviceLocator.getPersonService().get(id);
-        return new ApiResponse<>(new Meta(HttpStatus.OK), null, Mapper.toSimplePersonDTO(person));
+        return new ApiResponse<>(new Meta(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase()), null, Mapper.toSimplePersonDTO(person));
     }
 
     /**
@@ -145,9 +145,9 @@ public class PersonController {
     @LogMethod
     @PreAuthorize("hasAnyRole({'SUPER_ADMIN', 'ADMIN'})")
     @ResponseBody
-    public ApiResponse getPersonDTO(@PathVariable String id) throws AssignmentException {
+    public ApiResponse getPersonDTO(@PathVariable("id") String id) throws AssignmentException {
         Person person = serviceLocator.getPersonService().get(id);
-        return new ApiResponse<>(new Meta(HttpStatus.OK),  null, Mapper.toPersonDTO(person));
+        return new ApiResponse<>(new Meta(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase()),  null, Mapper.toPersonDTO(person));
     }
 
 
@@ -164,10 +164,10 @@ public class PersonController {
     @LogMethod
     @PreAuthorize("hasAnyRole({'SUPER_ADMIN', 'ADMIN'})")
     @ResponseBody
-    public ApiResponse create(@RequestBody @Valid PersonDTO personDTO) throws AssignmentException {
+    public ApiResponse<String> create(@RequestBody @Valid PersonDTO personDTO) throws AssignmentException {
         Person entity = toPerson(personDTO);
-        Person person = serviceLocator.getPersonService().create(entity);
-        return new ApiResponse<>(new Meta(HttpStatus.OK),  null, Mapper.toPersonDTO(person));
+        serviceLocator.getPersonService().create(entity);
+        return new ApiResponse<>(new Meta(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase()),  "Person added successfully", null);
     }
 
 
@@ -184,10 +184,10 @@ public class PersonController {
     @LogMethod
     @PreAuthorize("hasAnyRole({'SUPER_ADMIN', 'ADMIN'})")
     @ResponseBody
-    public ApiResponse update(@PathVariable String id, @Valid @RequestBody PersonDTO personDTO) throws AssignmentException {
+    public ApiResponse<String> update(@PathVariable("id") String id, @Valid @RequestBody PersonDTO personDTO) throws AssignmentException {
         Person entity = toPerson(personDTO);
-        Person person = serviceLocator.getPersonService().update(id, entity);
-        return new ApiResponse<>(new Meta(HttpStatus.OK),  null, Mapper.toPersonDTO(person));
+        serviceLocator.getPersonService().update(id, entity);
+        return new ApiResponse<>(new Meta(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase()),  "Person updated successfully",null);
     }
 
     /**
@@ -201,9 +201,9 @@ public class PersonController {
     @LogMethod
     @PreAuthorize("hasAnyRole({'SUPER_ADMIN', 'ADMIN'})")
     @ResponseBody
-    public ApiResponse delete(@PathVariable String id) throws AssignmentException {
+    public ApiResponse<String> delete(@PathVariable("id") String id) throws AssignmentException {
         serviceLocator.getPersonService().delete(id);
-        return new ApiResponse<>(new Meta(HttpStatus.OK),  "Delete Person Successfully", null);
+        return new ApiResponse<>(new Meta(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase()),  "Delete Person Successfully", null);
     }
 
 
@@ -218,14 +218,7 @@ public class PersonController {
         }
 
         entity.setHobbies(hobbies);
-        if (entity.getDateOfBirth() != null) {
-            entity.setDateOfBirth(dto.getDateOfBirth());
-        } else if (dto.getAge() > 0) {
-            LocalDate dateOfBirth = LocalDate.now().minusYears(dto.getAge()).withMonth(Month.JANUARY.getValue())
-                    .withDayOfMonth(1);
-            entity.setDateOfBirth(dateOfBirth);
-        }
-
+        entity.setDateOfBirth(dto.getDateOfBirth());
         return entity;
     }
 

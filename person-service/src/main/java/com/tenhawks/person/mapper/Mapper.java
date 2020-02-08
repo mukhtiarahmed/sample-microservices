@@ -28,11 +28,12 @@ public class Mapper {
         if (entity == null) return null;
 
         SimplePersonDTO dto = new SimplePersonDTO();
+        dto.setId(entity.getId());
         dto.setFirstName(entity.getFirstName());
         dto.setLastName(entity.getLastName());
         dto.setAge(PersonHelper.calculateAge(entity.getDateOfBirth()));
         dto.setFavouriteColour(entity.getFavouriteColour().getName());
-        dto.setHobby(entity.getHobbies().stream().map(Hobby::getName).collect(Collectors.toList()));
+        dto.setHobbies(entity.getHobbies().stream().map(Hobby::getName).collect(Collectors.toList()));
         return dto;
 
     }

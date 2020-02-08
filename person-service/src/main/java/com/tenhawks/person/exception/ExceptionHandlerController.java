@@ -39,8 +39,9 @@ public class ExceptionHandlerController {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(EntityNotFoundException.class)
     public ApiResponse<String> handleEntityNotFound(HttpServletRequest request, EntityNotFoundException exception) {
-        log.info("EntityNotFoundException Occured:: URL {} ", request.getRequestURL());
-        return new ApiResponse<>(new Meta(HttpStatus.NOT_FOUND), exception.getMessage(), null);
+        log.info("EntityNotFoundException Occurred:: URL {} ", request.getRequestURL());
+        return new ApiResponse<>(new Meta(HttpStatus.NOT_FOUND.value(), HttpStatus.NOT_FOUND.getReasonPhrase()),
+                exception.getMessage(), null);
 
     }
 
@@ -53,8 +54,9 @@ public class ExceptionHandlerController {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler({InvalidDataException.class})
     public ApiResponse<String> handleBadRequest(HttpServletRequest request, InvalidDataException exception) {
-        log.info("InvalidDataException Occured:: URL {} ", request.getRequestURL());
-        return new ApiResponse<>(new Meta(HttpStatus.BAD_REQUEST), exception.getMessage(), null);
+        log.info("InvalidDataException Occurred:: URL {} ", request.getRequestURL());
+        return new ApiResponse<>(new Meta(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase()),
+                exception.getMessage(), null);
     }
 
     /**
@@ -65,11 +67,12 @@ public class ExceptionHandlerController {
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler({MethodArgumentTypeMismatchException.class})
-    public ApiResponse handleBadRequest(HttpServletRequest request,
+    public ApiResponse<String> handleBadRequest(HttpServletRequest request,
                                         MethodArgumentTypeMismatchException exception) {
-        log.info("MethodArgumentTypeMismatchException Occured:: URL {} , method {} ",
+        log.info("MethodArgumentTypeMismatchException Occurred:: URL {} , method {} ",
                 request.getRequestURL(), request.getMethod());
-        return new ApiResponse<>(new Meta(HttpStatus.BAD_REQUEST), exception.getMessage(), null);
+        return new ApiResponse<>(new Meta(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase()),
+                exception.getMessage(), null);
     }
 
     /**
@@ -80,11 +83,12 @@ public class ExceptionHandlerController {
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler({HttpRequestMethodNotSupportedException.class})
-    public ApiResponse handleBadRequest(HttpServletRequest request,
+    public ApiResponse<String> handleBadRequest(HttpServletRequest request,
                                         HttpRequestMethodNotSupportedException exception) {
-        log.info("HttpRequestMethodNotSupportedException Occured:: URL {} , method {} ",
+        log.info("HttpRequestMethodNotSupportedException Occurred:: URL {} , method {} ",
                 request.getRequestURL(), request.getMethod());
-        return new ApiResponse<>(new Meta(HttpStatus.BAD_REQUEST), exception.getMessage(), null);
+        return new ApiResponse<>(new Meta(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase()),
+                exception.getMessage(), null);
     }
 
     /**
@@ -95,10 +99,11 @@ public class ExceptionHandlerController {
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler({HttpMessageNotReadableException.class})
-    public ApiResponse handleBadRequest(HttpServletRequest request, HttpMessageNotReadableException exception) {
-        log.info("HttpMessageNotReadableException Occured:: URL {} , method {} ",
+    public ApiResponse<String> handleBadRequest(HttpServletRequest request, HttpMessageNotReadableException exception) {
+        log.info("HttpMessageNotReadableException Occurred:: URL {} , method {} ",
                 request.getRequestURL(), request.getMethod());
-        return new ApiResponse<>(new Meta(HttpStatus.BAD_REQUEST), exception.getMessage(), null);
+        return new ApiResponse<>(new Meta(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase()),
+                exception.getMessage(), null);
     }
 
     /**
@@ -109,10 +114,11 @@ public class ExceptionHandlerController {
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler({MethodArgumentNotValidException.class})
-    public ApiResponse handleBadRequest(HttpServletRequest request, MethodArgumentNotValidException exception) {
+    public ApiResponse<String> handleBadRequest(HttpServletRequest request, MethodArgumentNotValidException exception) {
         log.info("MethodArgumentNotValidException Occurred:: URL {} , method {} ",
                 request.getRequestURL(), request.getMethod());
-        return new ApiResponse<>(new Meta(HttpStatus.BAD_REQUEST), exception.getMessage(), null);
+        return new ApiResponse<>(new Meta(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase()),
+                exception.getMessage(), null);
     }
 
     /**
@@ -123,10 +129,11 @@ public class ExceptionHandlerController {
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(AssignmentException.class)
-    public ApiResponse handleBadRequest(HttpServletRequest request, AssignmentException exception) {
-        log.error("AssignmentException Occured:: URL {} , method {} ",
+    public ApiResponse<String> handleBadRequest(HttpServletRequest request, AssignmentException exception) {
+        log.error("AssignmentException Occurred:: URL {} , method {} ",
                 request.getRequestURL(), request.getMethod(), exception);
-        return new ApiResponse<>(new Meta(HttpStatus.BAD_REQUEST), exception.getMessage(), null);
+        return new ApiResponse<>(new Meta(HttpStatus.BAD_REQUEST.value(), HttpStatus.BAD_REQUEST.getReasonPhrase()),
+                exception.getMessage(), null);
     }
 
 
@@ -138,10 +145,11 @@ public class ExceptionHandlerController {
      */
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(AccessDeniedException.class)
-    public ApiResponse handleBadRequest(HttpServletRequest request, AccessDeniedException exception) {
-        log.error("AccessDeniedException Occured:: URL {} , method {} ",
+    public ApiResponse<String> handleBadRequest(HttpServletRequest request, AccessDeniedException exception) {
+        log.error("AccessDeniedException Occurred:: URL {} , method {} ",
                 request.getRequestURL(), request.getMethod(), exception);
-        return new ApiResponse<>(new Meta(HttpStatus.UNAUTHORIZED), exception.getMessage(), null);
+        return new ApiResponse<>(new Meta(HttpStatus.UNAUTHORIZED.value(), HttpStatus.UNAUTHORIZED.getReasonPhrase()),
+                exception.getMessage(), null);
     }
 
     /**
@@ -152,10 +160,11 @@ public class ExceptionHandlerController {
      */
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(RuntimeException.class)
-    public ApiResponse handleBadRequest(HttpServletRequest request, RuntimeException exception) {
-        log.error("RuntimeException Occured:: URL {} , method {} ",
+    public ApiResponse<String> handleBadRequest(HttpServletRequest request, RuntimeException exception) {
+        log.error("RuntimeException Occurred:: URL {} , method {} ",
                 request.getRequestURL(), request.getMethod(), exception);
-        return new ApiResponse<>(new Meta(HttpStatus.INTERNAL_SERVER_ERROR), exception.getMessage(), null);
+        return new ApiResponse<>(new Meta(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase()), exception.getMessage(), null);
     }
 
     /**
@@ -166,10 +175,11 @@ public class ExceptionHandlerController {
      */
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(SQLException.class)
-    public ApiResponse handleBadRequest(HttpServletRequest request, SQLException exception) {
-        log.error("SQLException Occured:: URL {} , method {} ",
+    public ApiResponse<String> handleBadRequest(HttpServletRequest request, SQLException exception) {
+        log.error("SQLException Occurred:: URL {} , method {} ",
                 request.getRequestURL(), request.getMethod(), exception);
-        return new ApiResponse<>(new Meta(HttpStatus.INTERNAL_SERVER_ERROR), exception.getMessage(), null);
+        return new ApiResponse<>(new Meta(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase()), exception.getMessage(), null);
     }
 
     /**
@@ -180,10 +190,11 @@ public class ExceptionHandlerController {
      */
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ExceptionHandler(Exception.class)
-    public ApiResponse handleBadRequest(HttpServletRequest request, Exception exception) {
-        log.error("Exception Occured:: URL {} , method {} ",
+    public ApiResponse<String> handleBadRequest(HttpServletRequest request, Exception exception) {
+        log.error("Exception Occurred:: URL {} , method {} ",
                 request.getRequestURL(), request.getMethod(), exception);
-        return new ApiResponse<>(new Meta(HttpStatus.INTERNAL_SERVER_ERROR), exception.getMessage(), null);
+        return new ApiResponse<>(new Meta(HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase()), exception.getMessage(), null);
     }
 
 }

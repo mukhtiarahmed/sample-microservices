@@ -68,7 +68,7 @@ public class ColourController {
         List<Colour> colours = serviceLocator.getColourService().activeColourList();
         List<ColourDTO> colourDTOS = colours.stream().map(
                 Mapper::toColourDTO).collect(Collectors.toList());
-        return new ApiResponse<>(new Meta(HttpStatus.OK),  null, colourDTOS);
+        return new ApiResponse<>( new Meta(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase()),  null, colourDTOS);
     }
 
     /**
@@ -85,7 +85,7 @@ public class ColourController {
     @ResponseBody
     public ApiResponse<ColourDTO> get(@PathVariable String id) throws AssignmentException {
         Colour colour = serviceLocator.getColourService().get(id);
-        return new ApiResponse<>(new Meta(HttpStatus.OK),  null, Mapper.toColourDTO(colour));
+        return new ApiResponse<>(new Meta(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase()),  null, Mapper.toColourDTO(colour));
 
     }
 
@@ -107,7 +107,7 @@ public class ColourController {
         entity.setName(dto.getName());
         entity.setHex(dto.getHex());
         Colour colour = serviceLocator.getColourService().create(entity);
-        return new ApiResponse<>(new Meta(HttpStatus.OK),  null, Mapper.toColourDTO(colour));
+        return new ApiResponse<>(new Meta(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase()),  null, Mapper.toColourDTO(colour));
 
     }
 
@@ -130,7 +130,7 @@ public class ColourController {
         entity.setName(dto.getName());
         entity.setHex(dto.getHex());
         Colour colour = serviceLocator.getColourService().update(id, entity);
-        return new ApiResponse<>(new Meta(HttpStatus.OK),  null, Mapper.toColourDTO(colour));
+        return new ApiResponse<>(new Meta(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase()),  null, Mapper.toColourDTO(colour));
     }
 
     /**
@@ -140,12 +140,12 @@ public class ColourController {
      * @throws InvalidDataException if id is not positive
      * @throws AssignmentException  if any other error occurred during operation
      */
-    @RequestMapping(value = "/{id}", method = DELETE)
     @LogMethod
     @PreAuthorize("hasAnyRole({'SUPER_ADMIN', 'ADMIN'})")
+    @RequestMapping(value = "/{id}", method = DELETE)
     @ResponseBody
     public ApiResponse delete(@PathVariable String id) throws AssignmentException {
         serviceLocator.getColourService().delete(id);
-        return new ApiResponse<>(new Meta(HttpStatus.OK),  "Delete Colour Successfully", null);
+        return new ApiResponse<>(new Meta(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase()),  "Delete Colour Successfully", null);
     }
 }

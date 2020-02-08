@@ -2,7 +2,9 @@ package com.tenhawks.person.dto;
 
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
@@ -10,7 +12,8 @@ import java.io.Serializable;
  * @author mukhtiar.ahmed
  * @version 1.0
  */
-@Getter
+@Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class SearchCriteria implements Serializable {
 

@@ -46,7 +46,7 @@ public class UserController {
                 dozerBeanMapper.map(user, UserDetail.class)).collect(Collectors.toList());
         response.setData(userList);
         response.setMessage("Users list");
-        response.setStatus(new Meta(HttpStatus.OK));
+        response.setStatus(new Meta(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase()));
         return response;
 
     }
@@ -60,7 +60,7 @@ public class UserController {
         ApiResponse<UserDetail> response = new ApiResponse<>();
         response.setData(dozerBeanMapper.map(user, UserDetail.class));
         response.setMessage("User sign up successfully");
-        response.setStatus(new Meta(HttpStatus.OK));
+        response.setStatus(new Meta(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase()));
         return response;
 
     }

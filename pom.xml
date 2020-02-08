@@ -17,6 +17,7 @@
         <module>auth-service</module>
         <module>user-service</module>
         <module>person-service</module>
+        <module>client</module>
     </modules>
 
     <build>
@@ -24,7 +25,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-		<version>2.1.4.RELEASE</version>
+		        <version>2.1.4.RELEASE</version>
                 <executions>
                     <execution>
                         <goals>

@@ -40,7 +40,7 @@ public class UserController {
   public ApiResponse<UserDetail> getProfile(Principal principal) {
     UserDetail user = authServiceClient.getUser(principal.getName());
     ApiResponse<UserDetail> response = new ApiResponse<>();
-    response.setStatus(new Meta(HttpStatus.OK));
+    response.setStatus(new Meta(HttpStatus.OK.value(), HttpStatus.OK.getReasonPhrase()));
     response.setData(user);
     return response;
   }

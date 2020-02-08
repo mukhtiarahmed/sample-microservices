@@ -1,0 +1,60 @@
+spring:
+  application:
+    name: client-app
+  mvc:
+    servlet:
+      load-on-startup: 1
+
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+
+
+server:
+  servlet:
+    context-path: /client
+    session:
+      cookie:
+        path: /
+      timeout: 10m
+
+  port: 8088
+
+
+eureka:
+    client:
+      serviceUrl:
+        defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
+    instance:
+      preferIpAddress: true
+
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 1000000
+
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 160000000
+        readTimeout: 160000000
+
+remote:
+  token:
+    store: http://${GATEWAY_SERVER:localhost}:8080/auth/oauth/check_token
+
+
+
+clientId: cffe3990-6f0e-11e8-b750-4d8614c940ff
+clientSecret: secret
+grant-type: password
+scope: trust
+
+page:
+  size: 10
