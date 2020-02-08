@@ -66,7 +66,7 @@ public class AuthApplication {
     @Bean(name = "org.dozer.Mapper")
 	public DozerBeanMapper dozerBean() {
 		List<String> mappingFiles = Arrays.asList(
-				"dozer-configration-mapping.xml"
+				"dozer-configuration-mapping.xml"
 		);
 
 		DozerBeanMapper dozerBean = new DozerBeanMapper();

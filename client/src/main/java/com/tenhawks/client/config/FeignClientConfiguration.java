@@ -5,7 +5,6 @@ import com.tenhawks.client.util.ClientHelper;
 import feign.RequestInterceptor;
 import feign.RequestTemplate;
 import feign.codec.Encoder;
-import feign.form.FormEncoder;
 import feign.form.spring.SpringFormEncoder;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.ObjectFactory;

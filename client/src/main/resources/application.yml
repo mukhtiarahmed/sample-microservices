@@ -58,3 +58,7 @@ scope: trust
 
 page:
   size: 10
+
+logging:
+  level:
+    com.netflix.config.sources.URLConfigurationSource: ERROR

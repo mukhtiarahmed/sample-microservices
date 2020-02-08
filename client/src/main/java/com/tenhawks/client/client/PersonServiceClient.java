@@ -23,9 +23,10 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 
 /**
- * Created by hp on 2/6/2020.
+ * Person Service Feign Client.
+ * @author Mukhtiar Ahmed
+ *
  */
-
 @RibbonClient("person-service")
 @FeignClient(name = "person-service", path = "/person/api/1.0",
         configuration = FeignClientConfiguration.class, decode404 = true)

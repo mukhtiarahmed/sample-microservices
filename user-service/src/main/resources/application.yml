@@ -7,6 +7,10 @@ server:
   servlet:
       context-path: /user
 
+logging:
+  level:
+    com.netflix.config.sources.URLConfigurationSource: ERROR
+
 eureka:
     client:
       serviceUrl:

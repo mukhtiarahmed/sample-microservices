@@ -1,8 +1,8 @@
 logging:
   level:
-    org.springframework: error
-    org.springframework.security: debug
-
+    org.springframework: ERROR
+    org.springframework.security: INFO
+    com.netflix.config.sources.URLConfigurationSource: ERROR
 
 spring:
   application:
@@ -14,10 +14,6 @@ spring:
       keyspace-name: th_auth
       contact-points: ${CASSANDRA_HOST:localhost}
       schema-action: create_if_not_exists
-  #redis:
-  #  port: ${REDIS_PORT}
-  #  host: ${REDIS_HOST}
-  #  expiretime: 24
 
 server:
   port: 9292
@@ -53,3 +49,6 @@ feign:
       default:
         connectTimeout: 160000000
         readTimeout: 160000000
+
+
+

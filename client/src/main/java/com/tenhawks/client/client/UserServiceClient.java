@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 /**
- * Auth Service Feign Client.
+ * User Service Feign Client.
  * @author Mukhtiar Ahmed
  *
  */

@@ -79,5 +79,7 @@ management:
      routes:
        enabled: true
 
-
+logging:
+  level:
+    com.netflix.config.sources.URLConfigurationSource: ERROR
 

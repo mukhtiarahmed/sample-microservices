@@ -9,16 +9,12 @@ import com.tenhawks.client.dto.ListResponseDTO;
 import com.tenhawks.client.dto.PersonDTO;
 import com.tenhawks.client.dto.SearchCriteria;
 import com.tenhawks.client.dto.SimplePersonDTO;
-import com.tenhawks.client.exception.ClientException;
-import com.tenhawks.client.form.PersonMasterForm;
 import com.tenhawks.client.service.PersonService;
 import com.tenhawks.client.util.ClientHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +23,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 
-import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.List;
 
@@ -36,7 +31,9 @@ import static com.tenhawks.bean.CommonHelper.ERROR;
 import static com.tenhawks.bean.CommonHelper.SUCCESS;
 import static com.tenhawks.bean.CommonHelper.checkConfigNotNull;
 
-
+/**
+ * @author Mukhtiar Ahmed
+ */
 @Slf4j
 @Controller
 @RequestMapping("/person")

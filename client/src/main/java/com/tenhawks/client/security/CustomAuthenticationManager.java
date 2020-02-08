@@ -2,7 +2,9 @@ package com.tenhawks.client.security;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;
-
+/**
+ * @author Mukhtiar Ahmed
+ */
 public class CustomAuthenticationManager implements AuthenticationManager {
 	
 	private CustomAuthenticationProvider customAuthenticationProvider;

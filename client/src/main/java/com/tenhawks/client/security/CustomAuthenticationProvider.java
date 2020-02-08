@@ -1,10 +1,7 @@
 package com.tenhawks.client.security;
 
-import com.tenhawks.client.dto.UserDTO;
 import com.tenhawks.client.service.UserService;
-import org.apache.commons.collections.map.HashedMap;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -18,13 +15,14 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 import static com.tenhawks.bean.CommonHelper.checkConfigNotNull;
 import static com.tenhawks.client.util.ClientHelper.TOKEN_HEADER;
 import static com.tenhawks.client.util.ClientHelper.TOKEN_PREFIX;
 
+/**
+ * @author Mukhtiar Ahmed
+ */
 @Component
 public class CustomAuthenticationProvider implements AuthenticationProvider {
 
